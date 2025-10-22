@@ -19,6 +19,7 @@ test('Test checkboxes', async ({page})=>{
     // Uncheck the Home folder
     await page.locator('label[for="tree-node-home"]').uncheck();
     await expect(page.locator('#tree-node-home')).not.toBeChecked();
+    await expect(page.locator('#tree-node-home').isChecked()).toBeFalsy();
 
 
     // Expand the Documents folder
