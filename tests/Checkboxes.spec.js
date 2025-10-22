@@ -33,7 +33,7 @@ test('Test checkboxes', async ({page})=>{
     await page.locator('label[for="tree-node-general"]').check();
 
     // Assert Home checkbox
-    await expect(page.locator('#tree-node-office')).toBeChecked();
+    await expect(page.locator('#tree-node-office').isChecked()).toBeTruthy();
 
 
 })
