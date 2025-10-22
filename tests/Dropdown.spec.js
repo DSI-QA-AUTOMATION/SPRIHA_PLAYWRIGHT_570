@@ -25,7 +25,7 @@ test("Handle dropdowns", async ({page})=> {
     const options = page.locator('#oldSelectMenu option');
     await expect(options).toHaveCount(11);
     
-    const options2 = await page.$$('#oldSelectMenu option');
+    const options2 = await page.$$('#oldSelectMenu option');       //using JS array
     console.log("Number of options:",  options2.length)
     await expect(options2.length).toBe(11);
 
