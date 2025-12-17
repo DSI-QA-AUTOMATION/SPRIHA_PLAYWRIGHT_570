@@ -6,11 +6,11 @@ test('Mouse click actions', async({page}) => {
 
     const rightClick = await page.locator("#rightClickBtn");
     const doubleClick = await page.locator('#doubleClickBtn');
-    //const justClick = await page.locator('button:has-text("Click Me")');
+    const dynamicClick = await page.locator("//button[text()='Click Me']");
 
     await rightClick.click({button: 'right'});      //right click
     await doubleClick.dblclick();  //double click
-    //await justClick.click();                           //dynamic click
+    await dynamicClick.click();                           //dynamic click
 
     await expect(page.locator('#doubleClickMessage')).toHaveText('You have done a double click');
 
