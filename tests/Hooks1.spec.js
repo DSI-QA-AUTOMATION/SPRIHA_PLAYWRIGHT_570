@@ -2,7 +2,7 @@ const {test , expect }  = require ('@playwright/test')
 
 let page;
 
-test.beforeEach(async({browser}) => { 
+test.beforeAll(async({browser}) => { 
     page = await browser.newPage()
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
@@ -13,7 +13,7 @@ test.beforeEach(async({browser}) => {
 
 });
 
-test.afterEach(async() => {
+test.afterAll(async() => {
    //Logout
     await page.locator(".oxd-icon.bi-caret-down-fill.oxd-userdropdown-icon").click()
     await page.locator("//a[normalize-space()='Logout']").click()
