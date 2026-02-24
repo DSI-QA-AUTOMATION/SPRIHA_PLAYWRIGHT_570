@@ -4,9 +4,9 @@ export class WebTablePage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.table = page.getByRole('grid');
-    this.columns = table.getByRole('columnheader')
-    this.rows = table.getByRole('row')
+    this.table = page.locator('table');
+    this.columns = this.table.locator('thead th');
+    this.rows = this.table.locator('tbody tr');
 
     this.modal = page.getByRole('dialog')
 
@@ -19,11 +19,11 @@ export class WebTablePage extends BasePage {
   }
 
   async getColumnCount() {
-    return await this.columnHeaders.count();
+    return await this.columns.count();
   }
 
   async getRowCount() {
-    return await this.rows.filter({ hasText: /\S/ }).count();
+    return await this.rows.count();
   }
 
   async clickEditByRowId(id) {
@@ -37,7 +37,7 @@ export class WebTablePage extends BasePage {
 
 //print table details using loop
   async printTableData(){
-    const updatedRows = page.locator('.rt-tbody .rt-tr-group');
+    const updatedRows = this.page.locator('.rt-tbody .rt-tr-group');
 
     for(let i=0; i< await updatedRows.count(); i++){
       const row = updatedRows.nth(i);

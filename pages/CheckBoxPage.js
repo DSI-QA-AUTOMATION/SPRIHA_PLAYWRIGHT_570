@@ -5,21 +5,17 @@ export class CheckboxPage extends BasePage {
     super(page);
 
     //Home checkbox
-    this.homeCheckBox = page.locator("#tree-node-home");
-    this.homeLabel = page.locator('label[for="tree-node-home"]');
+    this.homeCheckBox = page.getByRole('checkbox', { name: 'Home' })
+    this.result = page.locator('#result');
 
     // Expand the Home folder
     this.toggle = page.locator('(//button[@title="Toggle"])[1]'); 
-  
-    this.documents = page.locator('#tree-node-documents');
-    this.downloads = page.locator('#tree-node-downloads');
-    this.desktop = page.locator('#tree-node-desktop');  
 
-    this.office = page.locator('#tree-node-office');
-    this.public = page.locator('#tree-node-public');
-    this.private = page.locator('#tree-node-private');
-    this.classified = page.locator('#tree-node-classified');
-    this.general = page.locator('#tree-node-general');
+    this.office = page.getByRole('checkbox', { name: 'Office' });
+    this.public = page.getByRole('checkbox', { name: 'Public' });
+    this.private = page.getByRole('checkbox', { name: 'Private' });
+    this.classified = page.getByRole('checkbox', { name: 'Classified' });
+    this.general = page.getByRole('checkbox', { name: 'General' });
   }
 
   async gotoCheckBoxPage() {
@@ -27,24 +23,20 @@ export class CheckboxPage extends BasePage {
   }
 
   async checkHomeBox() {
-    await this.homeLabel.check();
+    await this.homeCheckBox.check();
   }
 
   async uncheckHomeBox() {
-    await this.homeLabel.uncheck();
+    await this.homeCheckBox.uncheck();
   }
 
   async expandHome() {
     await this.toggle.click();
   }
 
-  async expandFolder(folderName) {
-    await this.page
-      .locator(`label:has-text("${folderName}")`)
-      .locator('..')
-      .locator('button[title="Toggle"]')
-      .click();
-  }
+  async expandFolder(name) {
+    await this.page.locator('div[role="treeitem"]', { hasText: name }).locator('.rc-tree-switcher').click();
+}
 
   async checkOfficeChildren() {
     await this.public.check();

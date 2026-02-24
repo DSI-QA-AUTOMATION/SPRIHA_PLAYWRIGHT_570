@@ -1,30 +1,19 @@
-const {test , expect} = require('@playwright/test')
+const {test , expect} = require('@playwright/test');
+import { InteractionsPage } from '../../pages/InteractionsPage';
 
 test('Drag and drop', async ({page})=>{
 
-    await page.goto('https://demoqa.com/droppable')
+    const dropPage = new InteractionsPage(page);
+
+    await dropPage.gotoDragAnDropPage();
 
     //simple drag and drop
-    const drag = await page.locator('#draggable');
-    const drop = await page.locator("(//div[@id='droppable'])[1]");
-
-    await drag.dragTo(drop);
-
-    await expect(drop).toHaveText('Dropped!') 
+    await dropPage.simpleDragAndDrop();
+    await expect(dropPage.simpleDropBox).toContainText('Dropped!', { timeout: 5000 }) ;
 
     //accept drag and drop
-    await page.locator('#droppableExample-tab-accept').click();
-
-    const notAcceptDrag = await page.locator('#notAcceptable')
-    const dropBox = await page.locator("(//div[@id='droppable'])[2]")
-
-    await notAcceptDrag.hover();
-    await page.mouse.down();
-
-    await dropBox.hover();
-    await page.mouse.up();
-
-    await page.waitForTimeout(3000);
-
+    await dropPage.acceptTabClick();
+    await dropPage.dragNotAcceptable();
+    await expect(dropPage.acceptDropBox).toContainText('Drop Here');
 
 })

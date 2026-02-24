@@ -7,9 +7,9 @@ export class RadioButtonPage extends BasePage {
     this.title = page.locator('h1.text-center');
 
     //Radio buttons
-    this.yesBtn = page.getByLabel('Yes');
-    this.impressiveBtn = page.getByLabel('Impressive');
-    this.noBtn = page.page.getByLabel('No');
+    this.yesBtn = page.locator('#yesRadio');
+    this.impressiveBtn = page.locator('#impressiveRadio');
+    this.noBtn = page.locator('#noRadio');
 
     // Result text
     this.resultText = page.locator('.text-success');

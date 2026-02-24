@@ -26,7 +26,7 @@ export class ButtonPage extends BasePage {
   }
 
   async performDynamicClick() {
-    await dynamicClick.click();
+    await this.dynamicClick.click();
   }
 
 }

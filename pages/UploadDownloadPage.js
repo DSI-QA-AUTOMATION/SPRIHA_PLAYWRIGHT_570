@@ -1,6 +1,7 @@
+const path = require('path');
 import { BasePage } from "./base/BasePage";
 
-export class TextboxPage extends BasePage {
+export class UploadDownloadPage extends BasePage {
   constructor(page) {
     super(page);
 
@@ -8,7 +9,7 @@ export class TextboxPage extends BasePage {
     this.uploadedFilePath = page.locator('#uploadedFilePath');
   }
 
-  async gottoUploadDownloadPage() {
+  async gotoUploadDownloadPage() {
     await this.goto("/upload-download");
   }
 

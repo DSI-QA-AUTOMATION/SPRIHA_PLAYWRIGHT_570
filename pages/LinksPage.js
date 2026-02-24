@@ -5,7 +5,7 @@ export class LinksPage extends BasePage {
     super(page);
 
     // Simple link (opens new tab)
-    this.homeLink = page.getByRole('link', { name: 'Home' });
+    this.homeLink = page.locator('#simpleLink');
 
     // API response links
     this.createdLink = page.locator('#created');

@@ -28,7 +28,7 @@ test( 'Handle alerts with confirmation', async ({page})=>{
     await alerts.handleDialog('Do you confirm action?');
 
     await alerts.confirmBtn.click();
-    await expect(alerts.confirmResult).toHaveText("You selected Cancel")
+    await expect(alerts.confirmResult).toHaveText("You selected Ok")
 });
 
 test( 'Promt dialog', async ({page})=>{

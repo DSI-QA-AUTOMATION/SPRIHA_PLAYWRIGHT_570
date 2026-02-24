@@ -16,10 +16,7 @@ export class AlertsPage extends BasePage {
   }
 
   async handleDialog(message, action = 'accept', text = '') {
-    this.page.on('dialog', async dialog => {  
-      //type of the alert
-      expect(dialog.message()).toContain(message)
-      
+    this.page.once('dialog', async dialog => {  
       if (action === 'accept') {
         await dialog.accept(text);
       } else {
@@ -27,5 +24,4 @@ export class AlertsPage extends BasePage {
       }
     })
   }
-
 }

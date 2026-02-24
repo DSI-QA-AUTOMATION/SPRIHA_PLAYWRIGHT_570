@@ -12,8 +12,8 @@ test ('Handle tables' , async ({page}) => {
     await expect(webTable.columns.nth(0)).toHaveText('First Name');
 
     const rowCount = await webTable.getRowCount();
-    console.log('Number of rows:', rowCount());
-    await expect(webTable.rows.nth(1)).toContainText('Cierra');
+    console.log('Number of rows:', rowCount);
+    await expect(webTable.rows.nth(0)).toContainText('Cierra');
     
     //click on edit button
     await webTable.clickEditByRowId(2)

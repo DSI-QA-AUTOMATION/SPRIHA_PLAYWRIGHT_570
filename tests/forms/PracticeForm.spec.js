@@ -1,26 +1,16 @@
 import { test, expect } from '@playwright/test';
 import { PracticeFormPage } from '../../pages/PracticeFormPage';
+import formData from '../../test-data/formData.json';
 
 test('Fill and submit Practice Form', async ({ page }) => {
 
   const form = new PracticeFormPage(page);
+  const user = formData.practiceFormUser;
 
   await form.gotoPracticeForm();
+  await expect(form.modal).not.toBeVisible();
 
-  await form.fillForm({
-    firstName: 'Spriha',
-    lastName: 'Zannat',
-    email: 'spriha@test.com',
-    mobile: '01712345678',
-    year: '1995',
-    month: 'March',
-    day: '15',
-    subject: 'Maths',
-    filePath: 'tests/Files/testFile.pdf',
-    address: 'Dhaka, Bangladesh',
-    state: 'NCR',
-    city: 'Delhi'
-  });
+  await form.fillForm(user);
 
   await form.submitForm();
 
