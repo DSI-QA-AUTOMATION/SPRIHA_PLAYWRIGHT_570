@@ -16,11 +16,11 @@ export class TextboxPage extends BasePage {
     await this.waitUntilVisible("#userName");
   }
 
-  async fillUpForm(user){
-    await this.fullName.fill(user.fullname);
-    await this.email.fill(user.email);
-    await this.currentAdd.fill(user.currentaddress);
-    await this.permanentAdd.fill(user.permanentaddress);
+  async fillUpForm(data){
+    await this.fullName.fill(data.name);
+    await this.email.fill(data.email);
+    await this.currentAdd.fill(data.currentaddress);
+    await this.permanentAdd.fill(data.permanentaddress);
   }
 
   async submitForm(){

@@ -1,10 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { TextboxPage } from "../../pages/TextBoxPage";
-import users from "../../test-data/users.json"
+const { generateRandomName , generateRandomEmail } = require ('../../utils/testUtils')
 
 test("Fill Text Box form and assert submitted values", async ({ page }) => {
   const form = new TextboxPage(page);
-  const user = users.textBoxUser;
 
   await form.gotoLoginPage();
   await expect(page).toHaveURL("https://demoqa.com/text-box");
@@ -16,13 +15,18 @@ test("Fill Text Box form and assert submitted values", async ({ page }) => {
   //Assert the placeholder
   await expect(form.fullName).toHaveAttribute("placeholder", "Full Name");
 
+  const userData = {
+    name: generateRandomName(),
+    email: generateRandomEmail(),
+    currentaddress: "Bangladesh",
+    permanentaddress: "Malaysia"
+  };
+
   // Fill the form
-  await form.fillUpForm(user);
+  await form.fillUpForm(userData);
   await form.submitForm();
 
   //Assert submitted data
-  await expect(page.locator("#output #name")).toHaveText("Name:Jude");
-  await expect(page.locator("#output #email")).toHaveText(
-    "Email:jude@gmail.com",
-  );
+  await expect(page.locator("#output #name")).toHaveText(`Name:${userData.name}`);
+  await expect(page.locator("#output #email")).toHaveText(`Email:${userData.email}`);
 });

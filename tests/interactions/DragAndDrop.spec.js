@@ -9,7 +9,7 @@ test('Drag and drop', async ({page})=>{
 
     //simple drag and drop
     await dropPage.simpleDragAndDrop();
-    await expect(dropPage.simpleDropBox).toContainText('Dropped!', { timeout: 5000 }) ;
+    await expect(dropPage.simpleDropBox).toContainText('Dropped!') ;
 
     //accept drag and drop
     await dropPage.acceptTabClick();
