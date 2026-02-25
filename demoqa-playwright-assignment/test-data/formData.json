@@ -1,0 +1,18 @@
+{
+  "practiceFormUser": {
+    "firstName": "Spriha",
+    "lastName": "Zannat",
+    "email": "spriha@test.com",
+    "gender": "Female",
+    "mobile": "1712345678",
+    "year": "1995",
+    "month": "March",
+    "day": "15",
+    "subject": "Maths",
+    "hobby": "Reading",
+    "filePath": "tests/Files/testFile.pdf",
+    "address": "Dhaka, Bangladesh",
+    "state": "NCR",
+    "city": "Delhi"
+  }
+}
