@@ -1,19 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { TextboxPage } from "../../pages/TextBoxPage";
-const { generateRandomName , generateRandomEmail } = require ('../../utils/testUtils')
+const { generateRandomName , generateRandomEmail } = require ('../../utils/testUtils');
 
-test("Fill Text Box form and assert submitted values", async ({ page }) => {
-  const form = new TextboxPage(page);
+test("TC-02: Submit text box with valid data", async ({ page }) => {
+  const textBox = new TextboxPage(page);
 
-  await form.gotoLoginPage();
-  await expect(page).toHaveURL("https://demoqa.com/text-box");
-
-  //Assert the title
-  const pageTitle = page.locator('//h1[text()="Text Box"]');
-  await expect(pageTitle).toHaveText("Text Box");
-
-  //Assert the placeholder
-  await expect(form.fullName).toHaveAttribute("placeholder", "Full Name");
+  await textBox.gotoTextBoxPage();
 
   const userData = {
     name: generateRandomName(),
@@ -23,10 +15,9 @@ test("Fill Text Box form and assert submitted values", async ({ page }) => {
   };
 
   // Fill the form
-  await form.fillUpForm(userData);
-  await form.submitForm();
+  await textBox.fillUpForm(userData);
+  await textBox.submitForm();
 
   //Assert submitted data
-  await expect(page.locator("#output #name")).toHaveText(`Name:${userData.name}`);
-  await expect(page.locator("#output #email")).toHaveText(`Email:${userData.email}`);
+  await textBox.verifySubmitForm(userData);
 });

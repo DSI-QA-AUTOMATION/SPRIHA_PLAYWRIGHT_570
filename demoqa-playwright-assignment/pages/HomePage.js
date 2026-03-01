@@ -1,31 +1,32 @@
+import { expect } from "@playwright/test";
 import { BasePage } from "./base/BasePage";
 
 export class HomePage extends BasePage {
   constructor(page) {
     super(page);
-    this.usernameInput = page.locator("#userName");
-    this.passwordInput = page.locator("#password");
-    this.loginBtn = page.locator("#login");
-    this.gotoStoreBtn = page.locator("#gotoStore");
-    this.logoutBtn = page.locator("#submit");
+
+    this.elementsCard = page.locator("//h5[text()='Elements']")
+    this.formsCard = page.locator("//h5[text()='Forms']");
+    this.alertsCard = page.locator("//h5[text()='Alerts, Frame & Windows']");
+    this.widgetsCard = page.locator("//h5[text()='Widgets']");
+    this.interactionsCard = page.locator("//h5[text()='Interactions']");
+    this.bookStoreCard = page.locator("//h5[text()='Book Store Application']");
   }
 
-  async gotoLoginPage() {
-    await this.goto("/login");
-    await this.waitUntilVisible('#userName');
+  async gotoDemoQAPage() {
+    await this.goto('/');
   }
 
-  async loginUser(username, password) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
-    await this.loginBtn.click();
+  async verifyAllCategoriesVisible() {
+    await expect(this.elementsCard).toBeVisible();
+    await expect(this.formsCard).toBeVisible();
+    await expect(this.alertsCard).toBeVisible();
+    await expect(this.widgetsCard).toBeVisible();
+    await expect(this.interactionsCard).toBeVisible();
+    await expect(this.bookStoreCard).toBeVisible();
   }
 
-  async goToBookStore() {
-    await this.gotoStoreBtn.click();
-  }
-
-  async logOut() {
-    await this.logoutBtn.click();
+  async clickBookStoreCard(){
+    await this.bookStoreCard.click();
   }
 }

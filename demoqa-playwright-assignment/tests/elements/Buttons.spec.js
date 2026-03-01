@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ButtonPage } from '../../pages/ButtonsPage';
 
-test('Buttons Action', async ({ page }) => {
+test('TC-06: Verify click actions', async ({ page }) => {
 
   const buttons = new ButtonPage(page);
 
@@ -13,7 +13,7 @@ test('Buttons Action', async ({ page }) => {
   await buttons.performDoubleClick();
   await expect(buttons.doubleClickMessage).toHaveText('You have done a double click');
 
-  await buttons.performDynamicClick();
+  await buttons.performSingleClick();
   await expect(buttons.dynamicClickMessage).toHaveText('You have done a dynamic click');
   
 })

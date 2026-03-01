@@ -1,5 +1,4 @@
 import { BasePage } from "./base/BasePage";
-const { waitForText } = require("../utils/waitHelpers").default;
 
 export class InteractionsPage extends BasePage {
   constructor(page) {
@@ -8,40 +7,46 @@ export class InteractionsPage extends BasePage {
     // Simple drag and drop
     this.draggable = page.locator("#draggable");
     this.simpleDropBox = page.locator("#simpleDropContainer #droppable");
-
-    // Accept drag and drop
-    this.acceptTab = page.locator("#droppableExample-tab-accept");
-    this.notAcceptable = page.locator("#notAcceptable");
-    this.acceptDropBox = page.locator("#acceptDropContainer #droppable");
   }
 
   async gotoDragAnDropPage() {
     await this.goto("/droppable");
   }
 
-  /*async simpleDragAndDrop() {
-    await this.draggable.hover();
-    await this.page.mouse.down();
-    await this.page.waitForTimeout(100);
-    await this.simpleDropBox.hover({force: true});
-    await this.page.waitForTimeout(100);
-    await this.page.mouse.up();
-  }*/
+  async simpleDragAndDrop(maxAttempts = 20) {
+    let lastError;
 
-  async simpleDragAndDrop() {
-    await this.draggable.dragTo(this.simpleDropBox);
-    await waitForText(this.simpleDropBox, "Dropped!");
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+      await this.draggable.scrollIntoViewIfNeeded();
+      await this.simpleDropBox.scrollIntoViewIfNeeded();
+
+      await this.draggable.dragTo(this.simpleDropBox, {
+        force: true,
+      });
+
+      // Use Playwright auto-wait assertion inside page
+      await this.simpleDropBox.waitFor({ state: "visible" });
+
+      const text = await this.simpleDropBox.textContent();
+
+      if (text && text.includes("Dropped!")) {
+        return; // success
+      }
+
+      throw new Error("Drop text not updated yet");
+
+    } catch (error) {
+      lastError = error;
+      console.log(`Simple drag attempt ${attempt} failed`);
+
+      if (attempt === maxAttempts) {
+        throw lastError;
+      }
+
+      // small delay before retry
+      await this.page.waitForTimeout(200);
+        }
+      }
+    }
   }
-
-  async acceptTabClick() {
-    await this.acceptTab.click();
-  }
-
-  async dragNotAcceptable() {
-    await this.notAcceptable.hover();
-    await this.page.mouse.down();
-
-    await this.acceptDropBox.hover();
-    await this.page.mouse.up();
-  }
-}

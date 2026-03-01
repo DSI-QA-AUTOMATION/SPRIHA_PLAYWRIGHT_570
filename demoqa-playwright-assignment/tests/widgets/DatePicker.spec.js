@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { WidgetsPage } from '../../pages/WidgetsPage';
+import { DatePickerPage } from '../../pages/DatePickerPage';
 
-test( 'Handle date picker', async ({page})=>{
+test( 'TC-13: Select a date', async ({page})=>{
 
-    const widgetsPage = new WidgetsPage(page);
-    await widgetsPage.gotoDatePickerPage();
+    const datePage = new DatePickerPage(page);
+    await datePage.gotoDatePickerPage();
 
-    await widgetsPage.selectDate('2027', 'January', '14');
+    await datePage.selectDate('2027', 'January', '14');
 
-    await expect(widgetsPage.dateInput).toHaveValue('01/14/2027');
+    await expect(datePage.dateInput).toHaveValue('01/14/2027');
 });

@@ -1,3 +1,4 @@
+import { expect } from "@playwright/test";
 import { BasePage } from "./base/BasePage";
 
 export class TextboxPage extends BasePage {
@@ -9,11 +10,17 @@ export class TextboxPage extends BasePage {
     this.currentAdd = page.locator('textarea[placeholder="Current Address"]');
     this.permanentAdd = page.locator("#permanentAddress");
     this.submitBtn = page.locator("#submit");
+
+    // Output section
+    this.outputName = page.locator("#output #name");
+    this.outputEmail = page.locator("#output #email");
+
+    this.pageHeader = page.locator("h1");
   }
 
-  async gotoLoginPage() {
+  async gotoTextBoxPage() {
     await this.goto("/text-box");
-    await this.waitUntilVisible("#userName");
+    await expect(this.pageHeader).toHaveText("Text Box");
   }
 
   async fillUpForm(data){
@@ -25,5 +32,10 @@ export class TextboxPage extends BasePage {
 
   async submitForm(){
     await this.submitBtn.click();
+  }
+
+  async verifySubmitForm(data){
+    await expect(this.outputName).toHaveText(`Name:${data.name}`);
+    await expect(this.outputEmail).toHaveText(`Email:${data.email}`);
   }
 }

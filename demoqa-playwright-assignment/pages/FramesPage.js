@@ -12,8 +12,8 @@ export class FramesPage extends BasePage{
         await this.goto('/frames');
     }
 
-    totalNumberOfFrames(){
-        return this.page.frames().length;
+    async totalNumberOfFrames(){
+        return await this.page.locator('iframe').count();
     }
 
     async getFrameByUrl(url) {

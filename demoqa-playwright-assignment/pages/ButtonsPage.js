@@ -25,7 +25,7 @@ export class ButtonPage extends BasePage {
     await this.doubleClick.dblclick();
   }
 
-  async performDynamicClick() {
+  async performSingleClick() {
     await this.dynamicClick.click();
   }
 

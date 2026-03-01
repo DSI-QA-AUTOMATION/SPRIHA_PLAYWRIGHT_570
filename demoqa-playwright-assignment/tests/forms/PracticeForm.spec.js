@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PracticeFormPage } from "../../pages/PracticeFormPage";
 import formData from "../../test-data/formData.json";
 
-test("Fill and submit Practice Form", async ({ page }) => {
+test("TC-09: Submit complete form", async ({ page }) => {
   const form = new PracticeFormPage(page);
   const user = formData.practiceFormUser;
 

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { RadioButtonPage } from '../../pages/RadioButtonPage';
 
-test('Test Radio Buttons', async ({page})=>{
+test('TC-04: Select radio button', async ({page})=>{
 
     const radioPage = new RadioButtonPage(page);
 

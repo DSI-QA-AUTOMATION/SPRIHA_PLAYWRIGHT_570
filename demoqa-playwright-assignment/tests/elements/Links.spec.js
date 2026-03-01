@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LinksPage } from '../../pages/LinksPage';
 
-test('Handle Links page', async ({ page }) => {
+test('TC-07: Verify link navigation', async ({ page }) => {
 
   const links = new LinksPage(page);
 

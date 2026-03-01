@@ -1,8 +1,12 @@
 {
-  "textBoxUser": {
-    "fullname": "Jude",
-    "email": "jude@gmail.com",
-    "currentaddress": "Sydney",
-    "permanentaddress": "Canada"
+  "addRecord": {
+    "firstName": "Spriha",
+    "lastName": "Zannat",
+    "email": "sprihatest@mail.com",
+    "age": "28",
+    "salary": "30000",
+    "department": "QA"
   }
 }
+
+

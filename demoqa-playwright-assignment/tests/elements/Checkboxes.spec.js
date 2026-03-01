@@ -1,7 +1,7 @@
 import { test , expect } from '@playwright/test'
 import { CheckboxPage } from '../../pages/CheckBoxPage';
 
-test('Test checkboxes', async ({page})=>{
+test('TC-03: Select multiple checkboxes', async ({page})=>{
 
     const checkbox = new CheckboxPage(page);
     await checkbox.gotoCheckBoxPage();

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { UploadDownloadPage } from "../../pages/UploadDownloadPage";
 
-test('test', async ({ page }) => {
+test('TC-07: Upload a file', async ({ page }) => {
 
   const uploadPage = new UploadDownloadPage(page);
 
