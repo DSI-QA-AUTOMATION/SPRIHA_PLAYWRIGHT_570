@@ -5,23 +5,21 @@ export class WidgetsPage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.toolTipBtn = page.locator("#toolTipButton");
-    this.tooltip = this.page.locator('.tooltip-inner');
+    this.tooltipButton = page.locator('#toolTipButton');
+    this.tooltipText = page.locator('.tooltip-inner');
   }
 
   async gotoToolTipsPage() {
-    await this.goto("/tool-tips");
+    await this.goto('/tool-tips');
   }
 
-  async verifyTooltipIsVisible() {
-    await this.toolTipBtn.scrollIntoViewIfNeeded();
-    await expect(this.toolTipBtn).toBeVisible();
-    await this.toolTipBtn.hover();
+  async hoverOnTooltipButton() {
+    await this.tooltipButton.scrollIntoViewIfNeeded();
+    await expect(this.tooltipButton).toBeVisible();
 
-    const box = await this.toolTipBtn.boundingBox();
-    await this.page.mouse.move(
-    box.x + box.width / 2,
-    box.y + box.height / 2
-    );
+    await this.tooltipButton.hover();
+
+    // Wait until tooltip appears
+    await expect(this.tooltipText).toBeVisible();
   }
 }

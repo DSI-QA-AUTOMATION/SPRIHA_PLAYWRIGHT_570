@@ -15,8 +15,8 @@ export class PracticeFormPage extends BasePage {
     //this.hobbySports = page.getByLabel('Sports');
     this.uploadPicture = page.locator('#uploadPicture');
     this.currentAddress = page.locator('#currentAddress');
-    this.stateDropdown = page.locator('#state');
-    this.cityDropdown = page.locator('#city');
+    this.stateDropdown = page.locator("#react-select-3-input");
+    this.cityDropdown = page.locator("#react-select-4-input");
     this.submitBtn = page.getByRole('button', { name: 'Submit' });
     this.modal = page.getByRole('dialog');
   }
@@ -58,11 +58,11 @@ export class PracticeFormPage extends BasePage {
     await this.currentAddress.fill(data.address);
 
     // State & City
-    await this.stateDropdown.click();
-    await this.page.getByText(data.state, { exact: true }).click();
+    await this.stateDropdown.fill(data.state);
+    await this.stateDropdown.press("Enter");
 
-    await this.cityDropdown.click();
-    await this.page.getByText(data.city, { exact: true }).click();
+    await this.cityDropdown.fill(data.city);
+    await this.cityDropdown.press("Enter");
   }
 
   async submitForm() {

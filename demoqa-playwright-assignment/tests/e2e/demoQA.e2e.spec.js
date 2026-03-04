@@ -25,8 +25,8 @@ test("TC-15: Complete user journey", async ({ page }) => {
 
   //Tooltips
   await widgets.gotoToolTipsPage();
-  await widgets.verifyTooltipIsVisible();
-  await expect(widgets.page.locator('.tooltip-inner')).toHaveText('You hovered over the Button');
+  await widgets.hoverOnTooltipButton();
+  await expect(widgets.tooltipText).toHaveText('You hovered over the Button');
 
   //Date picker
   await datePicker.gotoDatePickerPage();
